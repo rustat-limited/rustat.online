@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang = "ru">
+    <head>
+        <meta charset="utf-8">
+            <meta name="theme-color" content="">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="header.css" type="text/css"/>
+                    <link rel="stylesheet" href="style.css" type="text/css"/>
+                    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                        <script src = "slider.js"></script>
+                        <script src = "menu.js"></script>
+                        <script src = "fixed_menu.js"></script>
+                        <link rel="stylesheet" type="text/css" href = "animate.css"/><!-- Таблица стилей ANIMATED -->
+                        <script src="wow.min.js"></script>
+                        <script>new WOW().init();</script>
+                        <title>Контакты РуСтат</title>
+                        </head>
+    <body>
+        <header>
+            <div id = "top">
+                <a href = "index.html"><img id = "logo" src="img/rustat_logo.png" alt=""></a>
+                <div id = "header_contacts">
+                    <div id = "header_addres">
+                        <p>Санкт-Петербург, улица Профессора Попова, д.37, лит. Щ</p>
+                    </div>
+                    <div id = "header_tel">
+                        <p>+7 (812) 244-37-71</p>
+                    </div>
+                    <div id = "header_mail">
+                        <p>info@rustat.online</p>
+                    </div>
+                </div>
+                <div id = "header_buttons">
+                    <a href = "authorization.html"><div id = "callback" class = "header_button">
+                        Личный кабинет
+                    </div></a>
+                    <a href = "contacts.html"><div id = "sendmail" class = "header_button2">
+                        Помощь
+                    </div></a>
+                </div>
+                <div id = "burger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <menu class = "menu">
+                <ul>
+                    <div id = "close">╳</div>
+                    <a href = "sub.html"><li>Подписка</li></a>
+                    <a href = "about.html"><li>О продукте</li></a>
+                    <a href = "products.html"><li>Продукты и сервисы</li></a>
+                    <a href = "contacts.html"><li>Контакты</li></a>
+                </ul>
+            </menu>
+        </header>
+        <article>
+            <div id = "contacts_page">
+                <div id = "contacts">
+                    <h1>Контакты</h1>
+                    <p>РуСтат — Мы всегда на связи!</p>
+                    <br>
+                    <h4>Редакция информационно-аналитического агентства РуСтат</h4>
+                    <p>Телефон: 905-79-42</p>
+                    <p>Еmail: info@rustat.online</p>
+                    <p>Адрес: Санкт-Петербург, улица Профессора Попова, д.37, лит. Щ</p>
+                    <br>
+                    <h4>Бесплатный телефон «горячей линии»:</h4>
+                    <p>8-800-100-80-94</p>
+                </div>
+                <div id = "connection-wrapper">
+                    <form action="" id = connection>
+                        <p>
+                        <label for="name">Имя</label>
+                        <input type = "text" name = "name" required>
+                            </p>
+                            <p>
+                            <label for="email">Почта</label>
+                            <input type = "email" name = "email" required>
+                                </p>
+                                <p>
+                                <label for="message">Сообщение</label>
+                                <textarea name = "message" cols = "60" rows = "10"></textarea>
+                                </p>
+                                <div id = "erconts"></div>
+                                <br/>
+                                <small>Нажимая "Отправить" вы принимаете <a href = "politica.html">Политику Конфиденциальности</a></small>
+                                <button id = "submit">Отправить</button>
+                                </form>
+                    <script>
+                        $(function(){
+                          $('#connection').submit(function(){
+                                                  var errors = false;
+                                                  $(this).find('span').empty();
+                                                  
+                                                  if( !errors ){
+                                                  var data = $('#connection').serialize();
+                                                  $.ajax({
+                                                         url: 'sender.php',
+                                                         type: 'POST',
+                                                         data: data,
+                                                         beforeSend: function(){
+                                                         $("#erconts").html("Отправляем данные...");
+                                                         },
+                                                         success: function(res){
+                                                         if( res == 1 ){
+                                                         $("#erconts").html("Заявка отправлена");
+                                                         }else{
+                                                         $("#erconts").html("Что-то пошло не так, попробуйте еще раз");
+                                                         }
+                                                         },
+                                                         error: function(){
+                                                         $('#submit').next().text('Ошибка');
+                                                         }
+                                                         });
+                                                  }
+                                                  return false;
+                                                  });
+                          });
+                        </script>
+                </div>
+            </div>
+        </article>
+        <footer>
+            <p>&copy; ООО "РуСтат", <script type="text/javascript">
+                document.write(new Date().getFullYear());
+                </script>. Все права защищены</p>
+            <div id = "cont">
+                <p><a href = "sub.html">Подписка</a></p>
+                <p><a href = "about.html">О продукте</a></p>
+                <p><a href = "products.html">Продукты и сервисы</a></p>
+                <p><a href = "contacts.html">Контакты</a></p>
+            </div>
+        </footer>
+    </body>
+</html>
